@@ -12,114 +12,16 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/CartDrawer";
-import { ShoeCard, type Shoe } from "@/components/ShoeCard";
+import { ShoeCard } from "@/components/ShoeCard";
+import { SHOES, TRENDING_SNEAKERS } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = ["Men", "Women", "Running", "Lifestyle", "Sale"];
-
-const SHOES: Shoe[] = [
-  {
-    id: 1,
-    name: "Nike Air Max 270",
-    category: "Running",
-    price: 189,
-    originalPrice: 240,
-    rating: 4.8,
-    image: "/shoes/air-max-270.jpg",
-    badge: "Bestseller",
-  },
-  {
-    id: 2,
-    name: "Adidas Ultraboost Light",
-    category: "Running",
-    price: 165,
-    originalPrice: 200,
-    rating: 4.7,
-    image: "/shoes/ultraboost.jpg",
-  },
-  {
-    id: 3,
-    name: "Converse Chuck 70",
-    category: "Lifestyle",
-    price: 75,
-    originalPrice: 95,
-    rating: 4.6,
-    image: "/shoes/chuck-70.jpg",
-    badge: "New",
-  },
-  {
-    id: 4,
-    name: "Nike Pegasus 41",
-    category: "Running",
-    price: 130,
-    originalPrice: 130,
-    rating: 4.9,
-    image: "/shoes/pegasus.jpg",
-  },
-  {
-    id: 5,
-    name: "Yeezy Boost 350 V2",
-    category: "Streetwear",
-    price: 320,
-    originalPrice: 380,
-    rating: 4.5,
-    image: "/shoes/yeezy-350.jpg",
-  },
-  {
-    id: 6,
-    name: "Puma RS-X Toys",
-    category: "Lifestyle",
-    price: 110,
-    originalPrice: 140,
-    rating: 4.4,
-    image: "/shoes/rs-x.jpg",
-  },
-];
+const NAV_LINKS = ["مردانه", "زنانه", "دویدن", "لایف‌استایل", "تخفیف‌ها"];
 
 const TRUST_ITEMS = [
-  { icon: Truck, label: "Free shipping", hint: "On orders over $75" },
-  { icon: RotateCcw, label: "Easy returns", hint: "30-day return policy" },
-  { icon: ShieldCheck, label: "Secure payment", hint: "256-bit SSL checkout" },
-];
-
-const TRENDING_SNEAKERS: Shoe[] = [
-  {
-    id: 101,
-    name: "Aero Zoom Fly",
-    category: "Running",
-    price: 149,
-    originalPrice: 189,
-    rating: 4.8,
-    image: "/shoes/trending-1.png",
-    badge: "Trending",
-  },
-  {
-    id: 102,
-    name: "Velocity Strike",
-    category: "Running",
-    price: 129,
-    originalPrice: 165,
-    rating: 4.7,
-    image: "/shoes/trending-2.png",
-  },
-  {
-    id: 103,
-    name: "Green Court Classic",
-    category: "Lifestyle",
-    price: 95,
-    originalPrice: 120,
-    rating: 4.6,
-    image: "/shoes/trending-3.png",
-  },
-  {
-    id: 104,
-    name: "Sunset Retro High",
-    category: "Streetwear",
-    price: 112,
-    originalPrice: 140,
-    rating: 4.5,
-    image: "/shoes/trending-4.png",
-  },
+  { icon: Truck, label: "ارسال رایگان", hint: "برای سفارش‌های بالای ۷٬۵۰۰٬۰۰۰ تومان" },
+  { icon: RotateCcw, label: "بازگشت آسان", hint: "سیاست بازگشت ۳۰ روزه" },
+  { icon: ShieldCheck, label: "پرداخت امن", hint: "پرداخت SSL با رمزنگاری ۲۵۶ بیتی" },
 ];
 
 export default function Home() {
@@ -131,7 +33,7 @@ export default function Home() {
             <span className="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
               <ShoppingBag className="size-4" />
             </span>
-            SoleStyle
+            سولاستایل
           </a>
 
           <nav className="hidden items-center gap-1 md:flex">
@@ -147,10 +49,10 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" aria-label="Search" className="rounded-full">
+            <Button variant="ghost" size="icon" aria-label="جستجو" className="rounded-full">
               <Search />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Wishlist" className="rounded-full">
+            <Button variant="ghost" size="icon" aria-label="علاقه‌مندی‌ها" className="rounded-full">
               <Heart />
             </Button>
             <CartDrawer />
@@ -163,35 +65,35 @@ export default function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col items-start gap-6">
               <Badge className="rounded-full px-3 py-1" variant="secondary">
-                New Season · 2026 Collection
+                کلکسیون جدید · ۲۰۲۶
               </Badge>
-              <h1 className="font-heading text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Step into
-                <span className="text-muted-foreground"> style, </span>
-                built for every stride.
+              <h1 className="font-heading text-4xl leading-[1.3] font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                قدم به دنیای
+                <span className="text-muted-foreground"> استایل بگذارید، </span>
+                برای هر گام.
               </h1>
               <p className="max-w-md text-base leading-7 text-muted-foreground sm:text-lg">
-                Discover the season&apos;s most wanted sneakers — premium comfort,
-                bold design, and prices you&apos;ll love.
+                محبوب‌ترین کتانی‌های این فصل را کشف کنید؛ راحتی بی‌نظیر، طراحی
+                جسورانه و قیمت‌هایی که عاشقشان می‌شوید.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <Button size="lg" className="h-11 rounded-full px-6">
                   <ShoppingBag />
-                  Shop collection
+                  خرید از کلکسیون
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   className="h-11 rounded-full px-6"
                 >
-                  Explore running
+                  کاوش در دویدن
                 </Button>
               </div>
               <dl className="mt-2 flex flex-wrap gap-x-10 gap-y-4">
                 {[
-                  ["2.4K+", "Happy customers"],
-                  ["150+", "Sneaker styles"],
-                  ["4.8", "Average rating"],
+                  ["۲٫۴ هزار+", "مشتری راضی"],
+                  ["۱۵۰+", "سبک کتانی"],
+                  ["۴٫۸", "میانگین امتیاز"],
                 ].map(([value, label]) => (
                   <div key={label}>
                     <dt className="sr-only">{label}</dt>
@@ -207,7 +109,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-3xl bg-zinc-100 shadow-2xl shadow-black/10 dark:bg-zinc-900">
                 <Image
                   src="/shoes/hero.jpg"
-                  alt="Featured sneaker"
+                  alt="کتانی برجسته"
                   width={1200}
                   height={900}
                   priority
@@ -219,10 +121,10 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">
-                      Free next-day delivery
+                      ارسال رایگان فردا
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      On orders over $75
+                      برای سفارش‌های بالای ۷٬۵۰۰٬۰۰۰ تومان
                     </p>
                   </div>
                 </div>
@@ -239,10 +141,10 @@ export default function Home() {
               </span>
               <div>
                 <p className="text-sm font-semibold tracking-wider text-primary uppercase">
-                  Best selling
+                  پرفروش‌ترین
                 </p>
                 <h2 className="mt-1 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                  Trending sneakers
+                  کتانی‌های ترند
                 </h2>
               </div>
             </div>
@@ -250,7 +152,7 @@ export default function Home() {
               href="#"
               className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              View all
+              مشاهده همه
             </a>
           </div>
 
@@ -265,20 +167,20 @@ export default function Home() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-semibold tracking-wider text-primary uppercase">
-                Trending now
+                در حال ترند
               </p>
               <h2 className="mt-1 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Featured sneakers
+                کتانی‌های منتخب
               </h2>
             </div>
             <div className="flex gap-2">
-              {["All", "Running", "Lifestyle", "Streetwear"].map((filter) => (
+              {["همه", "دویدن", "لایف‌استایل", "استریت‌ور"].map((filter) => (
                 <button
                   key={filter}
                   type="button"
                   className={cn(
                     "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
-                    filter === "All"
+                    filter === "همه"
                       ? "border-foreground bg-foreground text-background"
                       : "border-border bg-background text-muted-foreground hover:text-foreground"
                   )}
@@ -315,8 +217,8 @@ export default function Home() {
 
       <footer className="border-t border-border/60">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
-          <p>© 2026 SoleStyle. All rights reserved.</p>
-          <p>Made with Next.js, shadcn/ui & Framer Motion</p>
+          <p>© ۲۰۲۶ سولاستایل. تمامی حقوق محفوظ است.</p>
+          <p>ساخته‌شده با Next.js، shadcn/ui و Framer Motion</p>
         </div>
       </footer>
     </div>

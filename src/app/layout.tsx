@@ -1,29 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import { CartProvider } from "@/contexts/cart-context";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["arabic", "latin"],
 });
 
 export const metadata: Metadata = {
-  title: "SoleStyle — Sneaker Store",
+  title: "سولاستایل — فروشگاه کتانی",
   description:
-    "Step into style. Discover the season's most wanted sneakers with free shipping and easy returns.",
+    "محبوب‌ترین کتانی‌های فصل را کشف کنید؛ با راحتی بی‌نظیر، طراحی جسورانه و ارسال رایگان.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="fa"
+      dir="rtl"
+      className={`${vazirmatn.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <CartProvider>{children}</CartProvider>

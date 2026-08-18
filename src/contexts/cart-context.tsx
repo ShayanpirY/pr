@@ -16,6 +16,7 @@ export type CartItem = {
   price: number;
   size: number;
   quantity: number;
+  color?: string;
 };
 
 type CartContextValue = {
@@ -34,18 +35,18 @@ const INITIAL_ITEMS: CartItem[] = [
   {
     id: 1,
     name: "Nike Air Max 270",
-    category: "Running",
-    image: "/shoes/air-max-270.jpg",
-    price: 189,
+    category: "دویدن",
+    image: "/shoes/air-max-270.png",
+    price: 18900000,
     size: 42,
     quantity: 1,
   },
   {
     id: 3,
     name: "Converse Chuck 70",
-    category: "Lifestyle",
-    image: "/shoes/chuck-70.jpg",
-    price: 75,
+    category: "لایف‌استایل",
+    image: "/shoes/chuck-70.png",
+    price: 7500000,
     size: 41,
     quantity: 2,
   },
