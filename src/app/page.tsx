@@ -1,9 +1,6 @@
-import Image from "next/image";
 import {
   Flame,
-  Heart,
   RotateCcw,
-  Search,
   ShieldCheck,
   ShoppingBag,
   Truck,
@@ -11,12 +8,16 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CartDrawer } from "@/components/CartDrawer";
+import { Magnetic } from "@/components/ui/magnetic";
+import { FeaturedGrid } from "@/components/featured-grid";
+import { Header } from "@/components/header";
+import { HeroVisual } from "@/components/hero-visual";
+import { HorizontalScroll } from "@/components/horizontal-scroll";
+import { Reveal } from "@/components/reveal";
 import { ShoeCard } from "@/components/ShoeCard";
+import { SkewCard } from "@/components/skew-card";
+import { SpotlightCard } from "@/components/spotlight-card";
 import { SHOES, TRENDING_SNEAKERS } from "@/lib/products";
-import { cn } from "@/lib/utils";
-
-const NAV_LINKS = ["مردانه", "زنانه", "دویدن", "لایف‌استایل", "تخفیف‌ها"];
 
 const TRUST_ITEMS = [
   { icon: Truck, label: "ارسال رایگان", hint: "برای سفارش‌های بالای ۷٬۵۰۰٬۰۰۰ تومان" },
@@ -26,39 +27,8 @@ const TRUST_ITEMS = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans text-foreground dark:bg-zinc-950">
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <a href="#" className="flex items-center gap-2 text-lg font-bold tracking-tight">
-            <span className="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
-              <ShoppingBag className="size-4" />
-            </span>
-            سولاستایل
-          </a>
-
-          <nav className="hidden items-center gap-1 md:flex">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                {link}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" aria-label="جستجو" className="rounded-full">
-              <Search />
-            </Button>
-            <Button variant="ghost" size="icon" aria-label="علاقه‌مندی‌ها" className="rounded-full">
-              <Heart />
-            </Button>
-            <CartDrawer />
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-transparent font-sans text-foreground">
+      <Header />
 
       <main>
         <section className="mx-auto w-full max-w-7xl px-4 pt-10 pb-16 sm:px-6 lg:px-8">
@@ -77,10 +47,12 @@ export default function Home() {
                 جسورانه و قیمت‌هایی که عاشقشان می‌شوید.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <Button size="lg" className="h-11 rounded-full px-6">
-                  <ShoppingBag />
-                  خرید از کلکسیون
-                </Button>
+                <Magnetic strength={0.3}>
+                  <Button size="lg" className="h-11 rounded-full px-6">
+                    <ShoppingBag />
+                    خرید از کلکسیون
+                  </Button>
+                </Magnetic>
                 <Button
                   size="lg"
                   variant="outline"
@@ -106,29 +78,7 @@ export default function Home() {
 
             <div className="relative">
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-primary/10 via-transparent to-amber-500/10 blur-2xl" />
-              <div className="relative overflow-hidden rounded-3xl bg-zinc-100 shadow-2xl shadow-black/10 dark:bg-zinc-900">
-                <Image
-                  src="/shoes/hero.jpg"
-                  alt="کتانی برجسته"
-                  width={1200}
-                  height={900}
-                  priority
-                  className="aspect-[4/3] w-full object-cover"
-                />
-                <div className="absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl bg-white/85 p-3 shadow-lg backdrop-blur dark:bg-zinc-950/70">
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background">
-                    <Truck className="size-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">
-                      ارسال رایگان فردا
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      برای سفارش‌های بالای ۷٬۵۰۰٬۰۰۰ تومان
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <HeroVisual />
             </div>
           </div>
         </section>
@@ -150,56 +100,31 @@ export default function Home() {
             </div>
             <a
               href="#"
-              className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-muted-foreground backdrop-blur-md transition-colors hover:border-white/30 hover:text-foreground"
             >
               مشاهده همه
             </a>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {TRENDING_SNEAKERS.map((shoe) => (
-              <ShoeCard key={shoe.id} shoe={shoe} />
+            {TRENDING_SNEAKERS.map((shoe, index) => (
+              <Reveal key={shoe.id} index={index}>
+                <SkewCard className="h-full">
+                  <ShoeCard shoe={shoe} />
+                </SkewCard>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-sm font-semibold tracking-wider text-primary uppercase">
-                در حال ترند
-              </p>
-              <h2 className="mt-1 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                کتانی‌های منتخب
-              </h2>
-            </div>
-            <div className="flex gap-2">
-              {["همه", "دویدن", "لایف‌استایل", "استریت‌ور"].map((filter) => (
-                <button
-                  key={filter}
-                  type="button"
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
-                    filter === "همه"
-                      ? "border-foreground bg-foreground text-background"
-                      : "border-border bg-background text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
+        <SpotlightCard shoe={SHOES[0]} />
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SHOES.map((shoe) => (
-              <ShoeCard key={shoe.id} shoe={shoe} />
-            ))}
-          </div>
-        </section>
+        <FeaturedGrid shoes={SHOES} />
+
+        <HorizontalScroll />
 
         <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="grid gap-4 rounded-3xl border border-border/60 bg-card p-6 sm:grid-cols-3 sm:p-8">
+          <div className="grid gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:grid-cols-3 sm:p-8">
             {TRUST_ITEMS.map(({ icon: Icon, label, hint }) => (
               <div key={label} className="flex items-start gap-4">
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-secondary text-foreground">

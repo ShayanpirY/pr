@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { Header } from "@/components/header";
 import { ProductView } from "@/components/ProductView";
 import { getProductById, PRODUCTS } from "@/lib/products";
 
@@ -34,5 +35,10 @@ export default async function ProductPage({ params }: Props) {
     notFound();
   }
 
-  return <ProductView product={product} />;
+  return (
+    <>
+      <Header />
+      <ProductView product={product} />
+    </>
+  );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ArrowLeft, Minus, PackageOpen, Plus, ShoppingBag, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -29,14 +30,21 @@ export function CartDrawer() {
             size="icon"
             aria-label="باز کردن سبد خرید"
             className="relative rounded-full"
+            data-cart-trigger=""
           />
         }
       >
         <ShoppingBag />
         {itemCount > 0 && (
-          <span className="absolute top-1 right-1 flex size-4 items-center justify-center rounded-full bg-destructive text-[10px] font-semibold text-white">
+          <motion.span
+            key={itemCount}
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: [1, 1.6, 1], opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="absolute top-1 right-1 flex size-4 items-center justify-center rounded-full bg-destructive text-[10px] font-semibold text-white"
+          >
             {faNum(itemCount)}
-          </span>
+          </motion.span>
         )}
       </SheetTrigger>
 
@@ -67,7 +75,7 @@ export function CartDrawer() {
           ) : (
             items.map((item) => (
               <div key={`${item.id}-${item.size}`} className="flex gap-3">
-                <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+                <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-zinc-900/40">
                   <Image
                     src={item.image}
                     alt={item.name}
